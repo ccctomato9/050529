@@ -14,7 +14,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* 提升 z-index 確保資訊卡不會被 AR 畫布覆蓋 */
+/* 資訊卡片樣式：確保浮動在 AR 相機畫面最上層 */
 .info-card {
   position: fixed;
   bottom: 20px;
@@ -23,30 +23,32 @@ body {
   width: 360px;
   max-height: 60vh;
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85); /* 深色背景提高文字識別度 */
   border-radius: 18px;
   padding: 16px;
-  display: none;
-  z-index: 9999; 
-  color: #ffffff;
+  display: none;                 /* 預設隱藏，待掃描成功後由 JS 觸發顯示 */
+  z-index: 99999 !important;     /* 最高權限層級，防止被 WebGL 畫布覆蓋 */
+  pointer-events: auto;          /* 允許使用者點擊與滾動卡片 */
+  box-sizing: border-box;
 }
 
 .info-card h2 {
-  margin: 0;
+  margin: 0 0 8px 0;
   font-size: 18px;
   color: #ffffff;
 }
 
 .info-card p {
-  font-size: 12px;
+  margin: 0;
+  font-size: 13px;
   line-height: 1.6;
   white-space: pre-line;
-  color: #dddddd;
+  color: #e0e0e0;
 }
 </style>
 
 <script>
-/* 骨頭資料 */
+/* 骨頭資料庫（完整保留你的文字內容） */
 const bones = [
   {
     title: "頭骨",
@@ -86,28 +88,34 @@ const bones = [
   }
 ];
 
-/* 註冊 A-Frame 自訂組件以處理 AR 事件 */
+/* 註冊 A-Frame 自訂組件，用於精確控管掃描事件與文字抽換 */
 AFRAME.registerComponent('bone-target-handler', {
   schema: {
-    index: {type: 'int', default: 0}
+    index: { type: 'int', default: 0 }
   },
   init: function () {
     const el = this.el;
-    const index = this.data.index;
-    const infoCard = document.getElementById("infoCard");
-    const titleEl = document.getElementById("title");
-    const descEl = document.getElementById("desc");
+    // 將 index 資料安全地掛載在當前 DOM 的 dataset 中，防止非同步非預期覆蓋
+    el.dataset.boneIndex = this.data.index;
 
-    el.addEventListener("targetFound", () => {
-      if (bones[index]) {
-        infoCard.style.display = "block";
-        titleEl.innerText = bones[index].title;
-        descEl.innerText = bones[index].desc;
+    // 當圖片被成功識別時
+    el.addEventListener("targetFound", (event) => {
+      const currentIndex = event.target.dataset.boneIndex;
+      const boneData = bones[currentIndex];
+      
+      if (boneData) {
+        const infoCard = document.getElementById("infoCard");
+        document.getElementById("title").innerText = boneData.title;
+        document.getElementById("desc").innerText = boneData.desc;
+        // 強制將 CSS 樣式設為 block 以顯示字卡
+        infoCard.style.setProperty("display", "block", "important");
       }
     });
 
+    // 當圖片離開相機視野、識別中斷時
     el.addEventListener("targetLost", () => {
-      infoCard.style.display = "none";
+      const infoCard = document.getElementById("infoCard");
+      infoCard.style.setProperty("display", "none", "important");
     });
   }
 });
@@ -128,15 +136,15 @@ AFRAME.registerComponent('bone-target-handler', {
   renderer="alpha: true; antialias: true;"
 >
   <a-assets>
-    <img id="bone1" src="bone1.png" />
-    <img id="bone2" src="bone2.png" />
-    <img id="bone3" src="bone3.png" />
-    <img id="bone4" src="bone4.png" />
-    <img id="bone5" src="bone5.png" />
-    <img id="bone6" src="bone6.png" />
-    <img id="bone7" src="bone7.png" />
-    <img id="bone8" src="bone8.png" />
-    <img id="bone9" src="bone9.png" />
+    <img id="bone1" src="bone1.png" crossorigin="anonymous" />
+    <img id="bone2" src="bone2.png" crossorigin="anonymous" />
+    <img id="bone3" src="bone3.png" crossorigin="anonymous" />
+    <img id="bone4" src="bone4.png" crossorigin="anonymous" />
+    <img id="bone5" src="bone5.png" crossorigin="anonymous" />
+    <img id="bone6" src="bone6.png" crossorigin="anonymous" />
+    <img id="bone7" src="bone7.png" crossorigin="anonymous" />
+    <img id="bone8" src="bone8.png" crossorigin="anonymous" />
+    <img id="bone9" src="bone9.png" crossorigin="anonymous" />
   </a-assets>
 
   <a-light type="ambient" intensity="2"></a-light>
