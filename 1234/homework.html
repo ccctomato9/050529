@@ -1,0 +1,296 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>AR 骨頭介紹</title>
+
+<!-- A-Frame -->
+<script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+
+<!-- MindAR -->
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* 資訊卡 */
+.info-card {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  text-align: center;
+  color: #333;
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.info-card h2 {
+  margin: 0;
+  color: #457B9D;
+}
+
+.info-card p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 資訊卡 -->
+<div class="info-card" id="infoCard">
+  <h2>Femur 股骨</h2>
+  <p>
+    人體最長的骨頭。<br>
+    主要功能是支撐身體重量與協助行走。
+  </p>
+</div>
+
+<a-scene
+mindar-image="imageTargetSrc: targets.mind;
+               autoStart: true;
+               uiScanning: true;
+               uiLoading: true;
+               uiError: true;"
+color-space="sRGB"
+renderer="colorManagement: true; physicallyCorrectLights: true"
+vr-mode-ui="enabled: false"
+device-orientation-permission-ui="enabled: false"
+>
+
+<!-- 圖片資源 -->
+<a-assets>
+
+   <img id="bone1" src="images/bone1.jpg" />
+  <img id="bone2" src="images/bone2.jpg" />
+  <img id="bone3" src="images/bone3.jpg" />
+  <img id="bone4" src="images/bone4.jpg" />
+  <img id="bone5" src="images/bone5.jpg" />
+  <img id="bone6" src="images/bone6.jpg" />
+  <img id="bone7" src="images/bone7.jpg" />
+  <img id="bone8" src="images/bone8.jpg" />
+  <img id="bone9" src="images/bone9.jpg" />
+  <img id="miniBone" src="mini-bone.png" />
+
+</a-assets>
+
+<!-- 光源 -->
+<a-light type="ambient" intensity="2"></a-light>
+
+<!-- 相機 -->
+<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+<!-- AR Target -->
+<a-entity mindar-image-target="targetIndex: 0">
+
+  <a-plane
+    src="#bone1"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 頭骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 1">
+
+  <a-plane
+    src="#bone2"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Skull 肩胛骨"
+    color="#E9C46A"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+  </a-entity>
+<a-entity mindar-image-target="targetIndex: 2">
+
+  <a-plane
+    src="#bone3"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 椎骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 3">
+
+  <a-plane
+    src="#bone4"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 肱骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 4">
+
+  <a-plane
+    src="#bone5"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 胸骨&肋骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 5">
+
+  <a-plane
+    src="#bone6"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 掌骨&指骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 6">
+
+  <a-plane
+    src="#bone7"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 髖骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 7">
+
+  <a-plane
+    src="#bone8"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 股骨"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+
+</a-entity>
+<a-entity mindar-image-target="targetIndex: 8">
+
+  <a-plane
+    src="#bone9"
+    width="1"
+    height="1.2"
+  ></a-plane>
+
+  <a-text
+    value="Femur 足部"
+    color="#457B9D"
+    align="center"
+    position="0 -0.9 0"
+  ></a-text>
+</a-entity>
+
+</a-scene>
+
+<script>
+
+/* 主骨頭漂浮 */
+AFRAME.registerComponent('float', {
+  init: function () {
+    this.startY = this.el.object3D.position.y;
+  },
+
+  tick: function (time) {
+    this.el.object3D.position.y =
+      this.startY + Math.sin(time / 600) * 0.03;
+  }
+});
+
+/* 小骨頭動畫 */
+AFRAME.registerComponent('floating-bone', {
+  init: function () {
+    this.startY = this.el.object3D.position.y;
+  },
+
+  tick: function (time) {
+
+    this.el.object3D.position.y =
+      this.startY + Math.sin(time / 500) * 0.05;
+
+    this.el.object3D.rotation.z += 0.01;
+  }
+});
+
+/* 掃描到圖片時顯示資訊卡 */
+const target = document.querySelector("#target");
+const infoCard = document.querySelector("#infoCard");
+
+target.addEventListener("targetFound", () => {
+  infoCard.style.display = "block";
+});
+
+target.addEventListener("targetLost", () => {
+  infoCard.style.display = "none";
+});
+
+</script>
+
+</body>
+</html>

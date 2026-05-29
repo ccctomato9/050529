@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>AR 骨頭介紹</title>
+
+<script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.info-card {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 360px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 18px;
+  padding: 16px;
+  display: none;
+}
+
+.info-card h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.info-card p {
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 資訊卡 -->
+<div class="info-card" id="infoCard">
+  <h2 id="title"></h2>
+  <p id="desc"></p>
+</div>
+
+<a-scene
+mindar-image="imageTargetSrc: targets.mind; autoStart: true; uiScanning: true;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+  renderer="alpha: true; antialias: true;"
+>
+<a-assets>
+  <img id="bone1" src="bone1.png" />
+  <img id="bone2" src="bone2.png" />
+  <img id="bone3" src="bone3.png" />
+  <img id="bone4" src="bone4.png" />
+  <img id="bone5" src="bone5.png" />
+  <img id="bone6" src="bone6.png" />
+  <img id="bone7" src="bone7.png" />
+  <img id="bone8" src="bone8.png" />
+  <img id="bone9" src="bone9.png" />
+</a-assets>
+
+<a-light type="ambient" intensity="2"></a-light>
+<a-camera look-controls="enabled: false"></a-camera>
+
+<!-- 0 頭骨 -->
+<a-entity mindar-image-target="targetIndex: 0">
+  <a-plane src="#bone1" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 1 肩胛骨 -->
+<a-entity mindar-image-target="targetIndex: 1">
+  <a-plane src="#bone2" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 2 椎骨 -->
+<a-entity mindar-image-target="targetIndex: 2">
+  <a-plane src="#bone3" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 3 肱骨 -->
+<a-entity mindar-image-target="targetIndex: 3">
+  <a-plane src="#bone4" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 4 胸骨&肋骨 -->
+<a-entity mindar-image-target="targetIndex: 4">
+  <a-plane src="#bone5" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 5 掌骨&指骨 -->
+<a-entity mindar-image-target="targetIndex: 5">
+  <a-plane src="#bone6" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 6 髖骨 -->
+<a-entity mindar-image-target="targetIndex: 6">
+  <a-plane src="#bone7" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 7 股骨 -->
+<a-entity mindar-image-target="targetIndex: 7">
+  <a-plane src="#bone8" width="1" height="1.2" float></a-plane>
+</a-entity>
+
+<!-- 8 足部 -->
+<a-entity mindar-image-target="targetIndex: 8">
+  <a-plane src="#bone9" width="1" height="1.2" float></a-plane>
+</a-entity>
+</a-scene>
+
+<script>
+
+/* 骨頭資料（完整保留你內容） */
+const bones = [
+{
+title: "頭骨",
+desc: `人類頭骨通常由22塊骨頭組成。除了下頜骨，骨頭間是由骨縫連接，只允許微量的運動。8塊骨頭組成腦顱，容納並保護整個腦部，包括大腦和腦幹（即中腦、小腦，腦橋和延髓）；
+14塊骨頭組成面顱，支撐面部並形成面部輪廓；顳骨包住中耳的6塊聽小骨。`
+},
+{
+title: "肩胛骨",
+desc: `肩胛骨位於胸廓背部，是三角形扁平骨。位於第2至第7肋骨高度，內側緣距脊柱約5公分。`
+},
+{
+title: "椎骨",
+desc: `椎骨（英語：vertebra）又稱脊椎骨、脊椎，是組成脊椎動物脊柱的不規則骨，
+屬於構成中軸骨核心的主要骨骼系統結構構件，成年後可作為主要的造血組織。典型椎骨包括椎體、椎弓、棘突和橫突、關節突等部分。
+依動物種類不同，椎骨可為硬骨或軟骨。哺乳動物則根據椎骨所在部位不同分為頸椎、胸椎、腰椎、薦椎、尾椎等。`
+},
+{
+title: "肱骨",
+desc: `肱骨（humerus）是肩到肘的長骨，是上臂的一部分。它將肩胛骨和前臂的橈骨和尺骨連接起來。
+肱骨由三部分組成。肱骨上端包括一個球型部分、一個較窄的頸部及兩個小突起，分別稱為大結節、小結節。
+肱骨幹上半部為圓柱形，下半部則較似稜柱。肱骨下端包含兩個上髁、兩個突起（肱骨滑車和肱骨小頭）及三個窩（冠狀窩、橈骨窩和鷹嘴窩）。
+`
+},
+{
+title: "胸骨&肋骨",
+desc: `胸骨（Sternum）是胸廓前方一塊長形扁平，領帶狀骨，接有肋 。
+肋骨（英語：rib）是胸廓中的枝狀骨，呈細長呈弓形的扁骨，在背部與相應的胸椎相連，由後上方向前下方傾斜，
+在人體有12對。動物的頭側肋骨藉由肋軟骨與胸骨相連，尾側肋骨一般不與胸骨相連。肋則包括肋骨（ribs）和肋軟骨（costal cartilages）。`
+},
+{
+title: "掌骨&指骨",
+desc: `掌骨是手部骨骼中間的部份，連接在近端手指及腕骨之間，而腕骨再與前臂連結。
+指骨（英語：phalanges of fingers）共14塊，均為長骨。
+拇指僅有兩節指骨；第二至五指各有三節指骨。各指的指骨由近側至遠側依次叫近節指骨、中節指骨、遠節指骨。`
+},
+{
+title: "髖骨",
+desc: `髖骨（hip bone）又稱胯骨、髀骨，為人體腰部至臀部的大型骨骼，共左右兩塊。
+幼年時，髖骨分為髂骨、坐骨和恥骨以及軟骨連接。
+成年後，它們之間的軟骨會骨化，成為一個整體，即髖骨。左髖骨、右髖骨、骶骨、尾骨以及它們之間的骨連接一起構成骨盆。髖骨與股骨構成髖關節。
+`
+},
+{
+title: "股骨",
+desc: `股骨（femur）俗稱大腿骨（thigh bone），是人體中最長、最大的管狀骨，位於大腿，分為一體及上、下兩端。
+在四肢動物，位於下肢（或後肢）深面。股骨上端彎曲，此彎曲部稱作股骨頸（femoral neck）。
+這種彎曲連接能有效降低外界對骨盆的衝擊，股骨頸有如一緩衝器。股骨頸上方有股骨頭（femoral head），近圓形，其關節面與骨盆的髖臼形成髖關節。`
+},
+{
+title: "足部",
+desc: `跗骨（英語：Tarsus）指的是四足類動物足部七塊骨骼組成的短骨群，位於脛骨、腓骨、蹠骨之間。
+它由中足（骰骨、三個楔骨、足舟骨）和後足（距骨和跟骨）組成。
+跗骨與蹠骨形成關節，而蹠骨又與近端趾骨形成關節。
+在脛骨與腓骨之下和跗骨之上的關節稱為踝關節本體。
+人類最大的跗骨是跟骨，是位於足跟的負重骨骼。
+`
+}
+];
+
+/* AR事件 */
+document.querySelectorAll("[mindar-image-target]").forEach((el, index) => {
+
+el.addEventListener("targetFound", () => {
+  document.getElementById("infoCard").style.display = "block";
+  document.getElementById("title").innerText = bones[index].title;
+  document.getElementById("desc").innerText = bones[index].desc;
+});
+
+el.addEventListener("targetLost", () => {
+  document.getElementById("infoCard").style.display = "none";
+});
+
+});
+
+</script>
+
+</body>
+</html>
